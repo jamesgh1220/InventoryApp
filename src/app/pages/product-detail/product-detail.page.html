@@ -1,0 +1,48 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Detalle producto</ion-title>
+    <ion-buttons slot="end">
+      <ion-button color="danger" (click)="confirmDelete()">
+        <ion-icon slot="icon-only" name="trash-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content *ngIf="product">
+  <ion-card>
+    <img *ngIf="product.image" [src]="product.image" />
+    <ion-card-header>
+      <ion-card-title>{{ product.name }}</ion-card-title>
+      <ion-card-subtitle
+        >Categoría: {{ product.category || 'Sin categoría' }}</ion-card-subtitle
+      >
+    </ion-card-header>
+    <ion-card-content>
+      <p><strong>Código:</strong> {{ product.code }}</p>
+      <p><strong>Stock:</strong> {{ product.stock }}</p>
+      <ion-grid>
+        <ion-row>
+          <ion-col>
+            <ion-button expand="block" (click)="updateStock(1)">+1</ion-button>
+          </ion-col>
+          <ion-col>
+            <ion-button
+              expand="block"
+              color="danger"
+              (click)="updateStock(-1)"
+              [disabled]="product.stock <= 0"
+              >-1</ion-button
+            >
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+      <ion-button expand="block" (click)="changePicture()"
+        >Cambiar foto</ion-button
+      >
+    </ion-card-content>
+  </ion-card>
+</ion-content>

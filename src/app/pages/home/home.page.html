@@ -1,0 +1,54 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Inventario</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="export('csv')">
+        <ion-icon slot="icon-only" name="document-text-outline"></ion-icon>
+      </ion-button>
+      <ion-button (click)="export('pdf')">
+        <ion-icon slot="icon-only" name="download-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-list>
+    <ion-item *ngFor="let product of products" (click)="openDetail(product)">
+      <ion-thumbnail slot="start">
+        <img [src]="product.image" *ngIf="product.image" />
+        <ion-row
+          *ngIf="!product.image"
+          class="ion-justify-content-center ion-align-items-center"
+          style="height: 100%"
+        >
+          <ion-icon
+            name="camera-outline"
+            size="large"
+            aria-hidden="true"
+          ></ion-icon>
+        </ion-row>
+      </ion-thumbnail>
+      <ion-label>
+        <h2>{{ product.name }}</h2>
+        <p>Stock: {{ product.stock }}</p>
+      </ion-label>
+    </ion-item>
+  </ion-list>
+
+  <ion-button
+    (click)="addProduct()"
+    class="ion-padding-top"
+    expand="block"
+    fill="outline"
+  >
+    <ion-icon slot="start" name="add"></ion-icon>
+    Agregar producto
+  </ion-button>
+
+  <ion-fab vertical="bottom" horizontal="end" slot="fixed">
+    <ion-fab-button (click)="scanCode()">
+      <ion-icon name="qr-code-outline"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+</ion-content>
