@@ -12,9 +12,9 @@
   </ion-toolbar>
 </ion-header> -->
 
-<ion-content>
-  <ion-list>
-    <ion-item *ngFor="let product of products" (click)="openDetail(product)">
+<ion-content color="dark">
+  <ion-list class="ion-no-padding">
+    <ion-item color="dark" *ngFor="let product of products" (click)="openDetail(product)">
       <ion-thumbnail slot="start">
         <img [src]="product.image" *ngIf="product.image" />
         <ion-row
@@ -30,7 +30,7 @@
         </ion-row>
       </ion-thumbnail>
       <ion-label>
-        <h2>{{ product.name }}</h2>
+        <h2 class="text-purple">{{ product.name }}</h2>
         <p>Stock: {{ product.stock }}</p>
       </ion-label>
     </ion-item>
