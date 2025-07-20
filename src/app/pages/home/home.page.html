@@ -1,18 +1,16 @@
-<!-- <ion-header>
-  <ion-toolbar>
-    <ion-title>Inventario</ion-title>
-    <ion-buttons slot="end">
-      <ion-button (click)="export('csv')">
-        <ion-icon slot="icon-only" name="document-text-outline"></ion-icon>
-      </ion-button>
-      <ion-button (click)="export('pdf')">
-        <ion-icon slot="icon-only" name="download-outline"></ion-icon>
-      </ion-button>
-    </ion-buttons>
-  </ion-toolbar>
-</ion-header> -->
-
 <ion-content color="dark">
+  <ion-button
+    (click)="addProduct()"
+    class="ion-margin"
+    expand="block"
+    color="lime"
+    shape="round"
+  >
+    <ion-icon slot="start" name="add-outline"></ion-icon>
+    <span class="text-secondary-dark">Agregar producto</span>
+    <ion-ripple-effect></ion-ripple-effect>
+  </ion-button>
+
   <ion-list class="ion-no-padding">
     <ion-item color="dark" *ngFor="let product of products" (click)="openDetail(product)">
       <ion-thumbnail slot="start">
@@ -30,24 +28,18 @@
         </ion-row>
       </ion-thumbnail>
       <ion-label>
-        <h2 class="text-purple">{{ product.name }}</h2>
-        <p>Stock: {{ product.stock }}</p>
+        <h2 class="text-primary">{{ product.name }}</h2>
+        <p class="text-secondary-light">Stock: {{ product.stock }}</p>
       </ion-label>
+      <ion-icon
+        name="eye-outline"
+        aria-hidden="true"
+      ></ion-icon>
     </ion-item>
   </ion-list>
 
-  <ion-button
-    (click)="addProduct()"
-    class="ion-padding-top"
-    expand="block"
-    fill="outline"
-  >
-    <ion-icon slot="start" name="add"></ion-icon>
-    Agregar producto
-  </ion-button>
-
   <ion-fab vertical="bottom" horizontal="end" slot="fixed">
-    <ion-fab-button (click)="scanCode()">
+    <ion-fab-button (click)="scanCode()" color="lime">
       <ion-icon name="qr-code-outline"></ion-icon>
     </ion-fab-button>
   </ion-fab>
