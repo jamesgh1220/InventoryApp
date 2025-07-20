@@ -1,38 +1,46 @@
-<ion-header>
-  <ion-toolbar>
-    <ion-title>Nuevo Producto</ion-title>
-  </ion-toolbar>
-</ion-header>
-
-<ion-content>
-  <ion-list>
-    <ion-item>
-      <ion-label position="floating">Código</ion-label>
-      <ion-input [(ngModel)]="code" readonly></ion-input>
+<ion-content color="dark">
+  <ion-title class="text-primary-lg ion-margin ion-text-center">Nuevo producto</ion-title>
+  <ion-list class="ion-no-padding">
+    <ion-item color="dark">
+      <ion-input [(ngModel)]="code" label="Código" label-placement="floating" readonly></ion-input>
     </ion-item>
-    <ion-item>
-      <ion-label position="floating">Nombre</ion-label>
-      <ion-input [(ngModel)]="name"></ion-input>
+    <ion-item color="dark">
+      <ion-input [(ngModel)]="name" label="Nombre" label-placement="floating"></ion-input>
     </ion-item>
-    <ion-item>
-      <ion-label position="floating">Categoría</ion-label>
-      <ion-input [(ngModel)]="category"></ion-input>
+    <ion-item color="dark">
+      <ion-input [(ngModel)]="category" label="Categoría" label-placement="floating"></ion-input>
     </ion-item>
-    <ion-item>
-      <ion-label position="floating">Stock</ion-label>
-      <ion-input type="number" [(ngModel)]="stock"></ion-input>
+    <ion-item color="dark">
+      <ion-input type="number" [(ngModel)]="stock" label="Stock" label-placement="floating"></ion-input>
     </ion-item>
   </ion-list>
 
   <div class="ion-padding" *ngIf="imageBase64">
     <img [src]="imageBase64" style="width: 100%; border-radius: 8px" />
   </div>
-  <ion-button expand="block" (click)="takePicture()">Tomar Foto</ion-button>
-  <ion-button
-    expand="block"
-    color="success"
-    (click)="save()"
-    [disabled]="!name || stock < 0"
-    >Guardar</ion-button
-  >
+  <ion-row class="ion-padding-top">
+    <ion-col siz="12">
+      <ion-button
+        color="purple"
+        expand="block"
+        shape="round"
+        (click)="takePicture()"
+      >
+        <ion-icon slot="start" name="camera-outline"></ion-icon>
+        Tomar foto
+      </ion-button>
+      <ion-button
+        class="ion-margin-top"
+        expand="block"
+        color="lime"
+        shape="round"
+        (click)="save()"
+        [disabled]="!name || stock < 0"
+      >
+        Guardar
+        <ion-icon slot="start" name="save-outline"></ion-icon>
+      </ion-button
+      >
+    </ion-col>
+  </ion-row>
 </ion-content>

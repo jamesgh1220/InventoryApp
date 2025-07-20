@@ -10,6 +10,14 @@ import { Router, NavigationEnd } from '@angular/router';
 })
 export class AppComponent implements OnInit {
   public showMenu:Boolean = false;
+  public menuItems = [
+    {
+      id: 1,
+      title: 'Agregar producto',
+      url: '/add-product',
+      icon: 'add-outline',
+    },
+  ];
 
   constructor(
     private menuCtrl: MenuController,

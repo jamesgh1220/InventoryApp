@@ -1,4 +1,4 @@
-<ion-header>
+<!-- <ion-header>
   <ion-toolbar>
     <ion-buttons slot="start">
       <ion-back-button defaultHref="/"></ion-back-button>
@@ -10,29 +10,31 @@
       </ion-button>
     </ion-buttons>
   </ion-toolbar>
-</ion-header>
+</ion-header> -->
 
-<ion-content *ngIf="product">
-  <ion-card>
+<ion-content color="dark" *ngIf="product">
+  <ion-card color="dark">
     <img *ngIf="product.image" [src]="product.image" />
     <ion-card-header>
-      <ion-card-title>{{ product.name }}</ion-card-title>
-      <ion-card-subtitle
+      <ion-card-title class="text-primary-lg">{{ product.name }}</ion-card-title>
+      <ion-card-subtitle class="text-secondary-light"
         >Categoría: {{ product.category || 'Sin categoría' }}</ion-card-subtitle
       >
     </ion-card-header>
     <ion-card-content>
-      <p><strong>Código:</strong> {{ product.code }}</p>
-      <p><strong>Stock:</strong> {{ product.stock }}</p>
+      <p class="text-secondary-light-sm"><strong>Código:</strong> {{ product.code }}</p>
+      <p class="text-secondary-light-sm"><strong>Stock:</strong> {{ product.stock }}</p>
       <ion-grid>
         <ion-row>
           <ion-col>
-            <ion-button expand="block" (click)="updateStock(1)">+1</ion-button>
+            <ion-button style="width: fit-content !important; margin-left: auto !important;" color="purple" shape="round" expand="block" (click)="updateStock(1)">+1</ion-button>
           </ion-col>
           <ion-col>
             <ion-button
+              style="width: fit-content !important; margin-right: auto !important;"
               expand="block"
-              color="danger"
+              color="light"
+              shape="round"
               (click)="updateStock(-1)"
               [disabled]="product.stock <= 0"
               >-1</ion-button
@@ -40,8 +42,20 @@
           </ion-col>
         </ion-row>
       </ion-grid>
-      <ion-button expand="block" (click)="changePicture()"
-        >Cambiar foto</ion-button
+      <ion-button color="lime" shape="round" expand="block" (click)="changePicture()">
+        <ion-icon slot="start" name="camera-outline"></ion-icon>
+        Cambiar foto
+        </ion-button
+      >
+      <ion-button
+        class="ion-margin-top"
+        color="light"
+        shape="round"
+        expand="block"
+        (click)="confirmDelete()"
+        >
+          <ion-icon slot="start" name="trash-outline"></ion-icon>
+          Eliminar producto</ion-button
       >
     </ion-card-content>
   </ion-card>
