@@ -12,6 +12,7 @@
       <ion-toolbar color="dark">
         <ion-buttons slot="start">
           <ion-menu-button color="purple" *ngIf="showMenu"></ion-menu-button>
+          <ion-back-button color="purple" defaultHref="/" *ngIf="!showMenu"></ion-back-button>
         </ion-buttons>
       </ion-toolbar>
     </ion-header>
