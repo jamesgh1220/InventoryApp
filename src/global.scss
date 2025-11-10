@@ -36,48 +36,14 @@
 /* @import "@ionic/angular/css/palettes/dark.class.css"; */
 // @import "@ionic/angular/css/palettes/dark.system.css";
 
+:root {
+  --ion-color-dark: #222428;
+}
+
+body {
+  background-color: #fff;
+}
+
 .text-purple {
   color: var(--ion-color-purple) !important;
-}
-
-.text-primary {
-  color: var(--ion-color-purple) !important;
-  font-weight: 900 !important;
-  font-size: 1.125rem !important;
-  line-height: 1.75rem !important;
-}
-
-.text-primary-lg {
-  color: var(--ion-color-purple) !important;
-  font-weight: 900 !important;
-  font-size: 1.25rem !important;
-  line-height: 1.75rem !important;
-}
-
-.text-secondary-dark {
-  color: var(--ion-color-dark) !important;
-  font-weight: 500 !important;
-  font-size: 1rem !important;
-  line-height: 1.5rem !important;
-}
-
-.text-secondary-sm-dark {
-  color: var(--ion-color-dark) !important;
-  font-weight: 500 !important;
-  font-size: 0.875rem !important;
-  line-height: 1.25rem !important;
-}
-
-.text-secondary-light {
-  color: var(--ion-color-light) !important;
-  font-weight: 500 !important;
-  font-size: 1rem !important;
-  line-height: 1.5rem !important;
-}
-
-.text-secondary-light-sm {
-  color: var(--ion-color-light) !important;
-  font-weight: 500 !important;
-  font-size: 0.875rem !important;
-  line-height: 1.25rem !important;
 }

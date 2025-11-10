@@ -1,71 +1,95 @@
+// src/app/services/product.service.ts
 import { Injectable } from '@angular/core';
-import { Storage } from '@ionic/storage-angular';
 import { Product } from '../models/product';
+import { v4 as uuidv4 } from 'uuid';
+import * as QRCode from 'qrcode';
 
 @Injectable({
-  providedIn: 'root',
+  providedIn: 'root'
 })
 export class ProductService {
-  private _storage: Storage | null = null;
-  private key = 'products';
+  private storageKey = 'my_inventory_products_v1';
 
-  constructor(private storage: Storage) {
-    this.init();
+  constructor() {}
+
+  private saveAll(products: Product[]) {
+    localStorage.setItem(this.storageKey, JSON.stringify(products));
   }
 
-  private async init() {
-    this._storage = await this.storage.create();
-  }
-
-  private async getStore(): Promise<Storage> {
-    // Espera hasta que _storage esté listo
-    if (!this._storage) {
-      this._storage = await this.storage.create();
-    }
-    return this._storage;
-  }
-
-  async getAll(): Promise<Product[]> {
-    const store = await this.getStore();
-    return (await store.get(this.key)) || [];
-  }
-
-  async getProductByCode(code: string): Promise<Product | undefined> {
-    const products = await this.getAll();
-    return products.find((p) => p.code === code);
-  }
-
-  async getProductById(id: string): Promise<Product | undefined> {
-    const products = await this.getAll();
-    return products.find((p) => p.id === id);
-  }
-
-  async save(product: Product): Promise<void> {
-    const store = await this.getStore();
-    const products = await this.getAll();
-    products.push(product);
-    await store.set(this.key, products);
-  }
-
-  async update(product: Product): Promise<void> {
-    const store = await this.getStore();
-    const products = await this.getAll();
-    const index = products.findIndex((p) => p.id === product.id);
-    if (index > -1) {
-      products[index] = product;
-      await store.set(this.key, products);
+  private loadAll(): Product[] {
+    const raw = localStorage.getItem(this.storageKey);
+    if (!raw) return [];
+    try {
+      return JSON.parse(raw) as Product[];
+    } catch {
+      return [];
     }
   }
 
-  async removeById(id: string): Promise<void> {
-    const store = await this.getStore();
-    const products = await this.getAll();
-    const updated = products.filter((p) => p.id !== id);
-    await store.set(this.key, updated);
+  async createProduct(data: {
+    name: string;
+    sku?: string;
+    category?: string;
+    description?: string;
+  }): Promise<Product> {
+    const products = this.loadAll();
+    const id = uuidv4();
+    const createdAt = new Date().toISOString();
+
+    // ✅ El QR ahora solo contiene el ID
+    const qrDataUrl = await QRCode.toDataURL(id, { margin: 1, width: 300 });
+
+    const product: Product = {
+      id,
+      name: data.name,
+      sku: data.sku,
+      category: data.category,
+      description: data.description,
+      createdAt,
+      qrDataUrl
+    };
+
+    products.unshift(product);
+    this.saveAll(products);
+    return product;
   }
 
-  async clear(): Promise<void> {
-    const store = await this.getStore();
-    await store.remove(this.key);
+  getAll(): Product[] {
+    return this.loadAll();
+  }
+
+  getById(id: string): Product | undefined {
+    return this.loadAll().find(p => p.id === id);
+  }
+
+  updateProduct(id: string, patch: Partial<Product>): Product | undefined {
+    const products = this.loadAll();
+    const i = products.findIndex(p => p.id === id);
+    if (i === -1) return undefined;
+    const updated = { ...products[i], ...patch };
+    products[i] = updated;
+    this.saveAll(products);
+    return updated;
+  }
+
+  deleteProduct(id: string): boolean {
+    let products = this.loadAll();
+    const originalLength = products.length;
+    products = products.filter(p => p.id !== id);
+    this.saveAll(products);
+    return products.length !== originalLength;
+  }
+
+  // Método por si quieres regenerar el QR (ej: cambias información principal):
+  async regenerateQrForProduct(product: Product): Promise<string> {
+    const payload = JSON.stringify({
+      id: product.id,
+      name: product.name,
+      sku: product.sku ?? null,
+      updatedAt: new Date().toISOString()
+    });
+    const qrDataUrl = await QRCode.toDataURL(payload, { margin: 1, width: 300 });
+    this.updateProduct(product.id, { qrDataUrl });
+    return qrDataUrl;
   }
 }

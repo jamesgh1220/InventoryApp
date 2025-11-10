@@ -1,9 +1,9 @@
 export interface Product {
   id: string;
-  code: string;
   name: string;
+  sku?: string;
   category?: string;
-  stock: number;
-  image?: string; // base64 o URL
-  createdAt: number;
+  description?: string;
+  createdAt: string; // ISO date
+  qrDataUrl?: string; // Data URL del QR (persistimos el QR en localStorage)
 }

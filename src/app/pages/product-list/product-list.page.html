@@ -1,0 +1,46 @@
+<app-header [quantity]="products.length || 0"></app-header>
+
+<div class="ion-padding-horizontal" style="background: linear-gradient(to right, #132d38, #1c414d, #285a6f) !important;">
+  <ion-searchbar placeholder="Buscar" mode="ios" color="light-secondary" class="ion-no-padding" (ionInput)="handleSearch($event)"></ion-searchbar>
+</div>
+<ion-content style="position: relative" color="light-secondary">
+  <ion-list
+    lines="none"
+    style="background-color: var(--ion-color-light-secondary); padding-bottom: 40px; margin-bottom: 20px;"
+    *ngIf="filtered().length; else empty"
+  >
+    <div style="position: absolute; background: linear-gradient(to right, #132d38, #1c414d, #285a6f) !important;; width: 100%; height: 4rem; top: 0; z-index: -1;"></div>
+    <div
+      style="background-color: #fff; box-shadow: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1); border-radius: 12px;"
+      class="ion-margin-horizontal ion-margin-top"
+      *ngFor="let p of filtered()"
+    >
+      <ion-item-sliding class="ion-no-padding" style="border-radius: 12px !important;">
+        <ion-item class="ion-no-padding">
+          <div style="display: flex; align-items: center; justify-content: space-between; width: 100%; padding: 16px;">
+            <ion-label (click)="viewProduct(p.id)">
+              <h2 style="font-weight: 800; font-size: 18px;">{{ p.name }}</h2>
+              <p style="font-weight: 400;">{{ p.category || 'Sin categoría' }} — {{ p.sku || '' }}</p>
+              <small style="color: var(--ion-color-light);">Creado: {{ p.createdAt | date:'short' }}</small>
+            </ion-label>
+          </div>
+        </ion-item>
+        <ion-item-options side="end">
+          <ion-item-option color="light-secondary" (click)="viewProduct(p.id)">
+            <ion-icon size="large" slot="icon-only" name="information-circle-outline"></ion-icon>
+          </ion-item-option>
+          <ion-item-option color="light-secondary" (click)="deleteProduct(p.id, p.name)">
+            <ion-icon size="large" slot="icon-only" color="danger" name="trash-outline"></ion-icon>
+          </ion-item-option>
+        </ion-item-options>
+      </ion-item-sliding>
+    </div>
+  </ion-list>
+
+  <ng-template #empty>
+    <div class="empty">
+      <p>No hay productos. Crea uno.</p>
+      <ion-button style="--background: linear-gradient(to right, #132d38, #1c414d, #285a6f) !important;" (click)="goCreate()">Crear producto</ion-button>
+    </div>
+  </ng-template>
+</ion-content>

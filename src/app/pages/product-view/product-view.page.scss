@@ -1,0 +1,16 @@
+/* src/app/pages/product-view/product-view.page.scss */
+.qr-wrap {
+  display:flex;
+  justify-content:center;
+  margin:12px 0;
+}
+.qr-wrap img {
+  width: 260px;
+  height: 260px;
+  object-fit: contain;
+  background: #ededed;
+  padding: 30px;
+  border: 1px solid #e0e0e0;
+  border-radius: 25px;
+  margin-bottom: 20px;
+}

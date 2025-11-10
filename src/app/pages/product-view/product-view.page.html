@@ -1,0 +1,32 @@
+<ion-header>
+  <ion-toolbar color="dark" class="ion-no-padding">
+    <div style="background: linear-gradient(to right, #132d38, #1c414d, #285a6f) !important;">
+      <ion-buttons slot="start">
+        <ion-back-button color="light-secondary" mode="md" defaultHref="/products"></ion-back-button>
+      </ion-buttons>
+      <ion-title style="color: var(--ion-color-light-secondary);">Producto</ion-title>
+    </div>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content *ngIf="product">
+  <ion-card style="box-shadow: none;">
+    <ion-card-header>
+      <ion-card-title>{{ product.name }}</ion-card-title>
+      <ion-card-subtitle>{{ product.category || 'Sin categoría' }}</ion-card-subtitle>
+    </ion-card-header>
+
+    <ion-card-content>
+      <p><strong>SKU:</strong> {{ product.sku || '-' }}</p>
+      <p><strong>Creado:</strong> {{ product.createdAt | date:'short' }}</p>
+      <p *ngIf="product.description"><strong>Descripción:</strong> {{ product.description }}</p>
+
+      <div class="qr-wrap" *ngIf="product.qrDataUrl">
+        <img [src]="product.qrDataUrl" alt="QR" />
+      </div>
+
+      <!-- <ion-button expand="full" (click)="printCard()">Imprimir etiqueta</ion-button> -->
+      <ion-button class="ion-margin-top" color="danger" fill="outline" expand="full" shape="round" (click)="deleteProduct()">Eliminar</ion-button>
+    </ion-card-content>
+  </ion-card>
+</ion-content>

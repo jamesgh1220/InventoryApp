@@ -1,0 +1,27 @@
+<ion-header class="ion-no-border" style="box-shadow: none;">
+  <ion-toolbar color="dark" class="ion-no-padding ion-no-border">
+    <nav class="ion-padding" style="display: flex; align-items: center; justify-content: space-between; background: linear-gradient(to right, #132d38, #1c414d, #285a6f) !important;">
+      <div style="display: flex; align-items: center; gap: 8px">
+        <!-- <ion-button (click)="goCreate()">Crear</ion-button> -->
+        <ion-button mode="ios" color="white" style="width: 3rem; height: 3rem;">
+          <ion-icon slot="icon-only" name="cube" size="large"></ion-icon>
+        </ion-button>
+        <ion-text color="white">
+          <h6 class="ion-no-margin">
+            Inventario
+          </h6>
+          <ion-text style="font-size: 14px;" color="white">{{ quantity }} productos
+          </ion-text>
+        </ion-text>
+      </div>
+      <div style="display: flex; align-items: center; gap: 8px">
+        <ion-button (click)="goScan()" mode="ios" color="light-secondary" style="width: 3rem; height: 3rem;">
+          <ion-icon slot="icon-only" name="qr-code-sharp" size="large"></ion-icon>
+        </ion-button>
+        <ion-button (click)="goCreate()" mode="ios" color="white" style="width: 3rem; height: 3rem;">
+          <ion-icon slot="icon-only" name="add" size="large"></ion-icon>
+        </ion-button>
+      </div>
+    </nav>
+  </ion-toolbar>
+</ion-header>

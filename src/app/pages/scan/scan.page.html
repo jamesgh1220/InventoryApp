@@ -1,0 +1,23 @@
+<ion-header>
+  <ion-toolbar color="dark" class="ion-no-padding">
+    <div style="background: linear-gradient(to right, #132d38, #1c414d, #285a6f) !important;">
+      <ion-buttons slot="start">
+        <ion-back-button color="light-secondary" mode="md" defaultHref="/products"></ion-back-button>
+      </ion-buttons>
+      <ion-title style="color: var(--ion-color-light-secondary);">Escanear código QR</ion-title>
+    </div>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div style="display: flex; align-items: center; justify-content: center; height: calc(100dvh - 56px); padding: 20px; background-color: #ededed;">
+    <ion-button style="width: 200px; aspect-ratio: 1 / 1; --background: linear-gradient(to right, #132d38, #1c414d, #285a6f) !important;" (click)="startScan()"  size="large" mode="ios">
+      <ion-icon style="font-size: 100px;" slot="icon-only" name="qr-code-outline"></ion-icon>
+    </ion-button>
+  </div>
+
+  <div *ngIf="scannedValue">
+    <h3>Resultado:</h3>
+    <pre>{{ scannedValue | json }}</pre>
+  </div>
+</ion-content>

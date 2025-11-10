@@ -1,0 +1,42 @@
+<ion-header>
+  <ion-toolbar color="dark" class="ion-no-padding">
+    <div style="background: linear-gradient(to right, #132d38, #1c414d, #285a6f) !important;">
+      <ion-buttons slot="start">
+        <ion-back-button color="light-secondary" mode="md" defaultHref="/products"></ion-back-button>
+      </ion-buttons>
+      <ion-title style="color: var(--ion-color-light-secondary);">Crear producto</ion-title>
+    </div>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <form [formGroup]="form" (ngSubmit)="submit()">
+    <ion-list lines="full">
+      <ion-item>
+        <ion-input formControlName="name" label="Nombre" labelPlacement="floating" placeholder="Nombre del producto"></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-input formControlName="sku" label="Referencia" labelPlacement="floating" placeholder="Referencia del producto"></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-input formControlName="category" label="Categoría" labelPlacement="floating" placeholder="Categoría del producto"></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-textarea formControlName="description" label="Descripción" labelPlacement="floating" placeholder="Descripción del producto"></ion-textarea>
+      </ion-item>
+    </ion-list>
+
+    <div class="ion-padding">
+      <ion-button shape="round" fill="outline" expand="full" type="submit">Crear y generar QR</ion-button>
+    </div>
+  </form>
+
+  <div *ngIf="previewQrDataUrl" class="preview">
+    <h3>QR generado</h3>
+    <img [src]="previewQrDataUrl" alt="QR" />
+    <!-- <ion-button expand="full" (click)="printQr()">Imprimir QR</ion-button> -->
+  </div>
+</ion-content>

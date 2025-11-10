@@ -1,30 +1,30 @@
 <ion-app>
-  <ion-menu contentId="main-content">
+  <!-- <ion-menu contentId="main-content">
     <ion-header>
-      <ion-toolbar color="dark">
+      <ion-toolbar>
         <ion-title class="text-primary">Inventario APP</ion-title>
       </ion-toolbar>
     </ion-header>
-    <ion-content color="dark" class="ion-padding">
-      <ion-list class="ion-no-padding">
-        <ion-item color="dark" *ngFor="let page of menuItems" [routerLink]="page.url" routerDirection="forward">
-          <ion-icon slot="start" [name]="page.icon"></ion-icon>
-          <ion-label class="text-secondary-light">{{ page.title }}</ion-label>
+    <ion-content class="ion-padding">
+      <ion-list class="ion-no-padding" lines="none">
+        <ion-item *ngFor="let page of menuItems" [routerLink]="page.url" routerDirection="forward">
+          <ion-icon slot="start" [name]="page.icon" color="dark"></ion-icon>
+          <ion-label class="text-secondary-dark">{{ page.title }}</ion-label>
         </ion-item>
       </ion-list>
     </ion-content>
   </ion-menu>
   <div class="ion-page" id="main-content">
     <ion-header>
-      <ion-toolbar color="dark">
+      <ion-toolbar>
         <ion-buttons slot="start">
-          <ion-menu-button color="purple" *ngIf="showMenu"></ion-menu-button>
-          <ion-back-button color="purple" defaultHref="/" *ngIf="!showMenu"></ion-back-button>
+          <ion-menu-button color="dark" *ngIf="showMenu"></ion-menu-button>
+          <ion-back-button color="dark" defaultHref="/" *ngIf="!showMenu"></ion-back-button>
         </ion-buttons>
       </ion-toolbar>
-    </ion-header>
-    <ion-content color="dark">
+    </ion-header> -->
+    <ion-content>
       <ion-router-outlet></ion-router-outlet>
     </ion-content>
-  </div>
+  <!-- </div> -->
 </ion-app>
